@@ -3,15 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Мемный Лофт</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
 <style>
   body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #1d4350, #a43931);
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
     color: #fff;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   .container {
     max-width: 1200px;
@@ -32,11 +35,18 @@
     width: 100%;
     border-radius: 8px;
   }
+  .tagline {
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+  }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>Добро пожаловать в мемный лофт</h1>
+  <p class="tagline">Будь как тот, кто заходит на сайт и говорит: "Это невероятно!"</p>
   <div class="memes" id="memes"></div>
 </div>
 <script>
@@ -50,12 +60,13 @@
     "crazypills","crow","cryingfloor","db","dbg"
   ];
   const container = document.getElementById('memes');
-  for(let i = 1; i <= 5000; i++) {
+  for(let i = 1; i <= 100; i++) {
     const img = new Image();
     const template = templates[(i - 1) % templates.length];
     const top = `терка ${i}`;
     const bottom = 'атата';
-    img.src = `https://api.memegen.link/images/${template}/${encodeURIComponent(top)}/${encodeURIComponent(bottom)}.png`;
+    const ext = (i % 10 === 0) ? 'gif' : 'png';
+    img.src = `https://api.memegen.link/images/${template}/${encodeURIComponent(top)}/${encodeURIComponent(bottom)}.${ext}`;
     img.alt = `meme ${i}`;
     img.loading = 'lazy';
     container.appendChild(img);

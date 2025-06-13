@@ -2,74 +2,64 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Мемный Лофт - страница 1</title>
+<title>Мемный Лофт</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
 <style>
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=60');
-    background-size: 400px;
-    background-repeat: repeat;
-    min-height: 200vh;
+    background: linear-gradient(135deg, #1d4350, #a43931);
+    color: #fff;
+    min-height: 100vh;
   }
   .container {
+    max-width: 1200px;
+    margin: auto;
     padding: 20px;
   }
   h1 {
-    color: #fff;
-    background: rgba(0,0,0,0.6);
-    display: inline-block;
-    padding: 10px 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
   }
   .memes {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 10px;
-    margin-top: 20px;
   }
   .memes img {
-    width: 300px;
-  }
-  a.next {
-    display: block;
-    margin-top: 40px;
-    font-size: 20px;
-    color: white;
+    width: 100%;
+    border-radius: 8px;
   }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>Добро пожаловать в мемный лофт</h1>
-  <div class="memes">
-<img src="https://api.memegen.link/images/aag/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/ackbar/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/afraid/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/agnes/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/aint-got-time/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/ams/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/ants/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/apcr/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/astronaut/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/atis/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/away/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/awesome/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/awesome-awkward/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/awkward/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/awkward-awesome/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/bad/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/badchoice/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/balloon/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/bd/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/because/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/bender/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/bihw/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/bilbo/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/biw/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-<img src="https://api.memegen.link/images/blb/%D1%82%D0%B5%D1%80%D0%BA%D0%B0/%D0%B0%D1%82%D0%B0%D1%82%D0%B0.png" alt="meme" width=300>
-  </div>
-  <a class="next" href="page2.html">Вперёд на вторую страницу &rarr;</a>
+  <div class="memes" id="memes"></div>
 </div>
+<script>
+  const templates = [
+    "aag","ackbar","afraid","agnes","aint-got-time","ams","ants","apcr",
+    "astronaut","atis","away","awesome","awesome-awkward","awkward",
+    "awkward-awesome","bad","badchoice","balloon","bd","because",
+    "bender","bihw","bilbo","biw","blb","boat","bongo","both","box",
+    "bs","bus","buzz","cake","captain","captain-america","cb","cbb",
+    "cbg","center","ch","chair","cheems","chosen","cmm","country",
+    "crazypills","crow","cryingfloor","db","dbg"
+  ];
+  const container = document.getElementById('memes');
+  for(let i = 1; i <= 5000; i++) {
+    const img = new Image();
+    const template = templates[(i - 1) % templates.length];
+    const top = `терка ${i}`;
+    const bottom = 'атата';
+    img.src = `https://api.memegen.link/images/${template}/${encodeURIComponent(top)}/${encodeURIComponent(bottom)}.png`;
+    img.alt = `meme ${i}`;
+    img.loading = 'lazy';
+    container.appendChild(img);
+  }
+</script>
 </body>
 </html>

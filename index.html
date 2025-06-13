@@ -2,82 +2,55 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Мемный Лофт</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+<title>SML Code - Кухонная тёрка и сыр</title>
 <style>
-  body {
-    font-family: 'Montserrat', sans-serif;
+ body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #2c3e50, #4ca1af);
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  .container {
-    max-width: 1200px;
-    margin: auto;
+ }
+ .block {
     padding: 20px;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-  }
-  .memes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 10px;
-  }
-  .memes img {
-    width: 100%;
-    border-radius: 50%;
-    transition: transform 0.3s;
-  }
-  .memes img:hover {
-    transform: scale(1.1) rotate(-5deg);
-  }
-  .tagline {
-    text-align: center;
-    margin-top: -10px;
-    margin-bottom: 30px;
-    font-size: 1.2em;
-  }
+ }
+ #block1 {
+    background-color: #f0f0f0;
+ }
+ #block2 {
+    background-color: #e0e0e0;
+ }
+ h1 {
+    font-size: 24pt;
+    font-weight: bold;
+ }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>Добро пожаловать в мемный лофт</h1>
-  <p class="tagline">Будь как тот, кто заходит на сайт и говорит: "Это невероятно!"</p>
-  <div class="memes" id="memes"></div>
-</div>
-<script>
-  const templates = [
-    "aag","ackbar","afraid","agnes","aint-got-time","ams","ants","apcr",
-    "astronaut","atis","away","awesome","awesome-awkward","awkward",
-    "awkward-awesome","bad","badchoice","balloon","bd","because",
-    "bender","bihw","bilbo","biw","blb","boat","bongo","both","box",
-    "bs","bus","buzz","cake","captain","captain-america","cb","cbb",
-    "cbg","center","ch","chair","cheems","chosen","cmm","country",
-    "crazypills","crow","cryingfloor","db","dbg"
-  ];
-  const words = [
-    'кит','ёжик','утюг','лампа','медведь','пицца','робот','кактус'
-  ];
-  const container = document.getElementById('memes');
-  for(let i = 1; i <= 100; i++) {
-    const img = new Image();
-    const template = templates[Math.floor(Math.random() * templates.length)];
-    const top = `${words[Math.floor(Math.random() * words.length)]} ${i}`;
-    const bottom = words[Math.floor(Math.random() * words.length)];
-    const ext = (i % 10 === 0) ? 'gif' : 'png';
-    img.src = `https://api.memegen.link/images/${template}/${encodeURIComponent(top)}/${encodeURIComponent(bottom)}.${ext}`;
-    img.alt = `meme ${i}`;
-    img.loading = 'lazy';
-    container.appendChild(img);
-  }
-</script>
+  <div id="block1" class="block">
+    <h1>SML Code - всё о кухонной тёрке</h1>
+    <p>Добро пожаловать! Здесь вы узнаете, зачем нужна кухонная тёрка и как она помогает приготовить отличный сыр.</p>
+    <img src="https://picsum.photos/400/200?grater" alt="Фото тёрки">
+    <img src="https://i.imgflip.com/30zz5g.jpg" alt="Мем про тёрку" width="300">
+    <p>Тёрка бывает разных видов: для мелкой, крупной, сырной стружки и даже для овощей.</p>
+  </div>
+
+  <div id="block2" class="block">
+    <h2>Как правильно тереть сыр?</h2>
+    <ol>
+      <li>Выберите подходящую сторону тёрки: мелкую или крупную.</li>
+      <li>Держите тёрку устойчиво, лучше всего на доске или тарелке.</li>
+      <li>Сыр перед тёркой можно немного охладить, чтобы он не прилипал.</li>
+      <li>Двигайте сыр вверх-вниз без сильного нажима.</li>
+    </ol>
+    <img src="https://picsum.photos/300/200?cheese" alt="Фото сыра">
+    <img src="https://i.imgflip.com/1otk96.jpg" alt="Мем про сыр" width="300">
+  </div>
+
+  <footer>
+    <p>Полезные ссылки:</p>
+    <ul>
+      <li><a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%91%D1%80%D0%BA%D0%B0">Википедия о тёрках</a></li>
+      <li><a href="https://ru.wikihow.com/%D1%82%D0%B5%D1%80%D0%B5%D1%82%D1%8C-%D1%81%D1%8B%D1%80">Как тереть сыр на WikiHow</a></li>
+    </ul>
+  </footer>
 </body>
 </html>

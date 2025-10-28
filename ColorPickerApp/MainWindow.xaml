@@ -1,0 +1,191 @@
+<Window x:Class="ColorPickerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ColorPickerApp"
+        xmlns:viewModels="clr-namespace:ColorPickerApp.ViewModels"
+        mc:Ignorable="d"
+        Title="Выбор цвета"
+        Width="720"
+        Height="520"
+        Background="{Binding AppliedBrush}"
+        Foreground="{Binding WindowForegroundBrush}">
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="F" Modifiers="Control" Command="{x:Static local:MainWindow.FocusSearchCommand}" />
+        <KeyBinding Key="Enter" Command="{Binding ApplyCommand}" />
+        <KeyBinding Key="Escape" Command="{x:Static local:MainWindow.CancelOrClearCommand}" />
+    </Window.InputBindings>
+
+    <Window.Resources>
+        <DataTemplate x:Key="SelectedColorTemplate">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4">
+                <Rectangle Width="28" Height="18" Fill="{Binding Brush}" Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="1" RadiusX="4" RadiusY="4" />
+                <TextBlock Text="{Binding Name}" Margin="8,0,0,0" VerticalAlignment="Center" FontWeight="SemiBold" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DropdownColorTemplate">
+            <DockPanel Margin="2">
+                <Rectangle Width="24" Height="16" Fill="{Binding Brush}" Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="0.5" RadiusX="3" RadiusY="3" />
+                <TextBlock Text="{Binding Name}" Margin="8,0,0,0" VerticalAlignment="Center" />
+            </DockPanel>
+        </DataTemplate>
+
+        <Style TargetType="ComboBox" x:Key="ColorComboBoxStyle">
+            <Setter Property="ItemTemplate" Value="{StaticResource DropdownColorTemplate}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton"
+                                          Focusable="False"
+                                          ClickMode="Press"
+                                          Background="{DynamicResource ThemeBackgroundBrush}"
+                                          BorderBrush="{DynamicResource ThemeForegroundBrush}"
+                                          BorderThickness="1"
+                                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="24" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter x:Name="ContentSite"
+                                                      Margin="4"
+                                                      VerticalAlignment="Center"
+                                                      Content="{TemplateBinding SelectionBoxItem}"
+                                                      ContentTemplate="{StaticResource SelectedColorTemplate}" />
+                                    <Path Grid.Column="1"
+                                          Margin="0,0,6,0"
+                                          VerticalAlignment="Center"
+                                          Data="M 0 0 L 6 6 L 12 0 Z"
+                                          Fill="{DynamicResource ThemeForegroundBrush}" />
+                                </Grid>
+                            </ToggleButton>
+                            <Popup x:Name="Popup"
+                                   Placement="Bottom"
+                                   PlacementTarget="{Binding ElementName=ToggleButton}"
+                                   StaysOpen="False"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Border Background="{DynamicResource ThemeBackgroundBrush}"
+                                        BorderBrush="{DynamicResource ThemeForegroundBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4"
+                                        Padding="4">
+                                    <ScrollViewer x:Name="DropDownScrollViewer"
+                                                  Width="{TemplateBinding ActualWidth}">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ToggleButton" Property="Opacity" Value="0.6" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox" BasedOn="{StaticResource ThemeTextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="Padding" Value="6" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="4">
+            <Label Content="Поиск:" VerticalAlignment="Center" Style="{StaticResource ThemeLabel}" />
+            <TextBox x:Name="SearchTextBox"
+                     Width="220"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+            <Button x:Name="ThemeButton"
+                    Content="Сменить тему"
+                    Margin="8,4"
+                    Command="{Binding ToggleThemeCommand}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="4">
+            <TextBlock Text="Выберите цвет:" FontWeight="Bold" />
+            <ComboBox Width="280"
+                      Style="{StaticResource ColorComboBoxStyle}"
+                      ItemsSource="{Binding ColorsView}"
+                      SelectedItem="{Binding SelectedColor}"
+                      IsTextSearchEnabled="False"
+                      HorizontalAlignment="Left" />
+        </StackPanel>
+
+        <Border Grid.Row="1" Grid.Column="1" Margin="12" Padding="12"
+                BorderBrush="{Binding PreviewForeground}" BorderThickness="1" CornerRadius="8"
+                Background="{DynamicResource ThemeBackgroundBrush}">
+            <StackPanel>
+                <TextBlock Text="Предпросмотр" FontWeight="Bold" Margin="0,0,0,8" />
+                <Rectangle Height="120" RadiusX="8" RadiusY="8"
+                           Fill="{Binding PreviewBrush}" StrokeThickness="1"
+                           Stroke="{Binding PreviewForeground}" />
+                <TextBlock Text="{Binding PreviewHex}" Margin="0,8,0,0" FontSize="16" FontWeight="SemiBold" Foreground="{Binding PreviewForeground}" />
+                <Button Content="Копировать HEX" Command="{Binding CopyHexCommand}" />
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="4">
+            <Button Content="Применить" Command="{Binding ApplyCommand}" />
+            <Button Content="Отмена" Command="{Binding CancelCommand}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="12,4" Orientation="Vertical">
+            <TextBlock Text="Недавние" FontWeight="Bold" />
+            <ItemsControl ItemsSource="{Binding RecentColors}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="4" Padding="6"
+                                Command="{Binding DataContext.SelectRecentCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding}">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="14" Fill="{Binding Brush}" Stroke="Black" StrokeThickness="0.5" RadiusX="3" RadiusY="3" />
+                                <TextBlock Text="{Binding Hex}" Margin="6,0,0,0" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="12" Padding="16"
+                Background="{DynamicResource ThemeBackgroundBrush}" CornerRadius="10">
+            <StackPanel>
+                <TextBlock Text="Текущий фон" FontWeight="Bold" />
+                <Rectangle Height="160" RadiusX="12" RadiusY="12"
+                           Fill="{Binding AppliedBrush}" StrokeThickness="1"
+                           Stroke="{Binding AppliedForeground}" />
+                <TextBlock Text="{Binding AppliedHex}" Margin="0,8,0,0" FontSize="18" FontWeight="SemiBold" Foreground="{Binding AppliedForeground}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
